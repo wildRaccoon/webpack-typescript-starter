@@ -8,6 +8,13 @@ export = function(args:any): Configuration {
         target: "web",
         devtool:"source-map",
         mode: "development",
+        
+        resolve:{
+            extensions:[
+                ".ts",
+                ".js"
+            ]
+        },
 
         entry: {
             app:[
