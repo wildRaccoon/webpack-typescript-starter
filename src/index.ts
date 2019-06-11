@@ -48,13 +48,22 @@ if(store$)
     console.log("store$");
 }
 
-store$.subscribe((x => console.log(x.count)));
+store$.subscribe((x => console.log(`first store - ${x.count}`)));
 
 store$.dispatch(increment());
 store$.dispatch(increment());
 store$.dispatch(increment());
+
+var store_2$ = <Store<{ count: number }>>injector.get(Store);
+var subs2$ = store_2$.subscribe((x => console.log(`second store - ${x.count}`)));
+console.log("--- second subscription");
+
 store$.dispatch(increment());
 store$.dispatch(decrement());
 store$.dispatch(decrement());
+
+subs2$.unsubscribe();
+console.log("--- second subscription");
+
 store$.dispatch(decrement());
 store$.dispatch(reset());
